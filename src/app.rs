@@ -20,7 +20,7 @@ pub fn app() -> Html {
         use_effect_with_deps(move |_| {
             let videos = videos.clone();
             wasm_bindgen_futures::spawn_local(async move {
-                let fetched_videos: Vec<Video> = Request::get("https://www.ilqy1314.xyz/vidapi/")
+                let fetched_videos: Vec<Video> = Request::get("https://www.abc.com/vidapi/")
                     .send()
                     .await
                     .unwrap()
@@ -45,8 +45,8 @@ pub fn app() -> Html {
                         return;
                     }
 
-                    let new_msg = String::from("https://www.ilqy1314.xyz/") + &name;
-                    greet_msg.set(vec![html_nested!{<source src={ new_msg } type="video/mp4" />}]);
+                    let new_msg = String::from("https://www.abc.com/") + &name;
+                    greet_msg.set(vec![html_nested!{<video width="62%" controls=true><source src={ new_msg } type="video/mp4" /><script src="https://2gether.video/release/extension.website.user.js"></script></video>}]);
                 });
 
                 || {}
@@ -72,10 +72,7 @@ pub fn app() -> Html {
     html! {
         <main class="container">
             <div class="row">
-                <video width="62%" controls=true>
-                    {for greet_msg.iter().map(|v| v.clone())}
-                    <script src="https://2gether.video/release/extension.website.user.js"></script>
-                </video> 
+                {for greet_msg.iter().map(|v| v.clone())}
             </div>
 
             <form class="row" onsubmit={greet}>
